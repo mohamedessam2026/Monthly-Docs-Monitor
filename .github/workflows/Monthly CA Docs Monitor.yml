@@ -28,7 +28,7 @@ jobs:
 
       - name: Run Python Script
         env:
-          BASE_URLS: '["https://android.googleapis.com/attestation/root","https://web.archive.org/cdx/search/cdx?url=developer.android.com/google/play/integrity/overview&output=json"]'
+          BASE_URLS: '["https://android.googleapis.com/attestation/root","https://web.archive.org/cdx/search/cdx?url=android.googleapis.com/attestation/root&output=json"]'
           SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
           RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
           SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
