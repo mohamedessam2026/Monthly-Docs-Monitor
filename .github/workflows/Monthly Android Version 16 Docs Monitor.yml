@@ -1,4 +1,4 @@
-name: Monthly Android Docs Monitor
+name: Monthly Android Version 16 Docs Monitor
 
 on:
   schedule:
