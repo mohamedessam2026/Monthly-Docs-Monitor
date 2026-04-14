@@ -1,0 +1,34 @@
+name: Monthly Docs Monitor
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch: 
+
+jobs:
+  run-monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests beautifulsoup4 markdownify
+
+      - name: Run Python Script
+        env:
+          BASE_URLS: >-
+            [
+              "https://developer.android.com/about/versions/16",
+            ]
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
+          SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
+        run: python your_script_name.py
