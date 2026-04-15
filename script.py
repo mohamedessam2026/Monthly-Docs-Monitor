@@ -12,6 +12,7 @@ from email.message import EmailMessage
 from enum import Enum
 import difflib
 import html
+from datetime import datetime
 #========================= Configuration =======================
 env_urls = os.getenv("BASE_URLS")
 Base_URLS = json.loads(env_urls)
