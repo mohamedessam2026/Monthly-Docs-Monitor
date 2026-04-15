@@ -10,7 +10,7 @@ Save and categorize content based on your preferences.
 
 
 
-![](https://developer-feedback-header.svg)
+![](https://developer.android.com/static/images/shared/preview-feedback-header.svg)
 
 ### Feedback and issues
 
@@ -47,7 +47,8 @@ You can subscribe and vote for an issue by **starring it**
 in the issue tracker. For more information, see
 [Subscribing by starring an issue](https://developers.google.com/issue-tracker/guides/subscribe#subscribing_by_starring_an_issue). For general help with Google Issue Tracker, see the [documentation](https://developers.google.com/issue-tracker/).
 
-Moh
+Due to the volume of feedback, submitted issues from any channel might not receive a response and issues might be closed upon release of the next build. This process allows our teams to focus on issues that are still reproducible in the latest release.
+
 If your feedback is closed and you're still experiencing the issue on the latest build, please check the [release notes](/about/versions/15/release-notes) and the lists of [top open issues](/about/versions/15/qpr-top-issues) and [recently created issues](/about/versions/15/qpr-recent-issues) and **star** ![](/static/images/shared/star-issue.svg) the issue if it already exists. If not, please submit your feedback again.
 
 ### Where to report issues
@@ -75,5 +76,6 @@ You can also report issues using the Android Beta Feedback app ![Icon for the An
 
 To help Google manage feedback volumes and control for duplicates, new issues submitted through the Android Beta Feedback app remain separate from those [reported through the issue tracker](#create_vote) until reviewed and verified.
 
-Test Test
+Due to the volume of feedback, submitted issues from any channel might not receive a response and issues might be closed upon release of the next build. This process allows our teams to focus on issues that are still reproducible in the latest release.
+
 If your feedback is closed and you're still experiencing the issue on the latest build, please check the [release notes](/about/versions/15/release-notes) and the lists of [top open issues](/about/versions/15/qpr-top-issues) and [recently created issues](/about/versions/15/qpr-recent-issues) and **star** ![](/static/images/shared/star-issue.svg) the issue if it already exists. If not, please submit your feedback again from the Android Beta Feedback app running on the latest release.

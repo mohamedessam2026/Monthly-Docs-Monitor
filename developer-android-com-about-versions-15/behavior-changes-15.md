@@ -7,7 +7,12 @@
 
 
 
-Mo
+
+Like previous releases, Android 15 includes behavior changes that might affect
+your app. The following behavior changes apply exclusively to apps that are
+targeting Android 15 or higher. If your app is targeting Android 15 or higher,
+you should modify your app to support these behaviors properly, where
+applicable.
 
 Be sure to also review the list of [behavior changes that affect all apps
 running on Android 15](/about/versions/15/behavior-changes-all) regardless of your app's [`targetSdkVersion`](/guide/topics/manifest/uses-sdk-element#target).
@@ -180,7 +185,7 @@ following types of foreground services:
 * [`microphone`](/develop/background-work/services/fg-service-types#microphone) (this restriction has been in place for `microphone` since
   Android 14)
 
-If a Essam
+If a `BOOT_COMPLETED` receiver tries to launch any of those types of foreground
 services, the system throws [`ForegroundServiceStartNotAllowedException`](/reference/android/app/ForegroundServiceStartNotAllowedException).
 
 ##### Testing
@@ -274,7 +279,7 @@ Android 15 (API level 35):
   is used (`%0` in the format string):
 
   ```
-  LOLException: Illegal format argument index = 0
+  IllegalFormatArgumentIndexException: Illegal format argument index = 0
   ```
 
   In this case, the issue can be fixed by using an argument index of 1 (`%1`
