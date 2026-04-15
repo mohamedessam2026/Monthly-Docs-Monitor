@@ -29,8 +29,7 @@ experiences](https://io.google/2024/explore/25ff7e80-ca0b-4b3b-aa89-aa796618b3af
 
 ### Low Light Boost
 
-Android 15 introduces *Low Light Boost*, an auto-exposure mode available to
-both [Camera 2](/media/camera/camera2) and the
+adasdasdascqwefboth [Camera 2](/media/camera/camera2) and the
 [night mode camera extension](/reference/android/hardware/camera2/CameraExtensionCharacteristics#EXTENSION_NIGHT). Low Light Boost adjusts the
 exposure of the Preview stream in low-light conditions. This is different from
 how the night mode camera extension creates still images, because night mode
