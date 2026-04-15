@@ -34,34 +34,27 @@ def get_sub_links_from_url(start_url):
         response = requests.get(start_url, timeout=REQUEST_TIMEOUT_IN_SEC)
         response.raise_for_status()
         
-        content_type = response.headers.get('Content-Type', '').lower()
-        if 'application/json' in content_type:
-            return [start_url]
-        
         soup = BeautifulSoup(response.text, 'html.parser')
         links = set()
         
-        parsed_base = urlparse(start_url)
-        base_domain = parsed_base.netloc  
-        base_path = parsed_base.path      
+        side_menu = soup.select_one('devsite-book-nav nav.devsite-book-nav')
         
-        for a_tag in soup.find_all('a', href=True):
+        if not side_menu:
+            return [start_url]
+            
+        for a_tag in side_menu.find_all('a', href=True):
             href = a_tag['href']
-            full_url = urljoin(start_url, href)
+            full_url = urljoin(start_url, href).split('#')[0].rstrip('/')
             
-            parsed_full = urlparse(full_url)
+            if "/about/versions/" in full_url:
+                links.add(full_url)
             
-            if parsed_full.netloc == base_domain and base_path in parsed_full.path:
-                clean_url = full_url.split('#')[0]
-                links.add(clean_url)
-                
         result = sorted(list(links))
         return result if result else [start_url]
 
     except Exception as e:
-        error_msg = f"EXP from get_sub_links_from_url() , message : {str(e)}"
-        raise Exception(error_msg) from e
-           
+        raise Exception(f"Error in get_sub_links_from_url: {str(e)}")
+              
 def get_http_response(url):
     try:
         response = requests.get(url, timeout=REQUEST_TIMEOUT_IN_SEC)
@@ -78,6 +71,8 @@ def get_content_from_web_page(response):
 
         if 'application/json' in content_type:
             data = response.json()
+
+            data = transform_api_body_timestamps(data)
 
             html_content = "<html><body><article>"
             
@@ -124,6 +119,34 @@ def get_file_name_from_url(domain_url,sub_url):
         return file_name
     except Exception as e:
         error_msg = "Exp from get_file_name_from_url() , message : "+str(e)
+        raise Exception(error_msg) from e
+
+def transform_api_body_timestamps(data):
+
+    try:
+        if not data or not isinstance(data, list):
+            return data
+        
+        headers = data[0]
+        
+        if "timestamp" in headers:
+            ts_index = headers.index("timestamp")
+            
+            for row in data[1:]:
+                if len(row) > ts_index:
+                    raw_ts = row[ts_index]
+                    try:
+                        dt_obj = datetime.strptime(raw_ts, '%Y%m%d%H%M%S')
+                        human_time = dt_obj.strftime('%Y-%m-%d %H:%M:%S')
+                        
+                        row[ts_index] = human_time
+                    except (ValueError, TypeError):
+                        continue
+        
+        return data
+        
+    except Exception as e:
+        error_msg = "Exp from transform_api_body_timestamps(), message: " + str(e)
         raise Exception(error_msg) from e
 #==============================================================
 
@@ -393,7 +416,6 @@ if __name__ == "__main__":
             dir_name = generate_dir_name_from_url(domain_url)
             create_directory(dir_name)
             all_links = get_sub_links_from_url(domain_url)
-            
             # Go through all the links
             for i, url in enumerate(all_links, 1):
                 file_name = get_file_name_from_url(domain_url,url)
